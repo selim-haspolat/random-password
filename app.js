@@ -8,7 +8,8 @@ const copied = document.getElementById('copied')
 let value = 15
 let text = ''
 const characters =
-"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,!^&?_-/";
+"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()\_+~|}{[]:;?><,./-=";
+
 
 range.addEventListener("change", (e) => {
     value = range.value
@@ -21,15 +22,20 @@ submit.addEventListener("click", (e) => {
   let newPassword = generatePassword(value)
   psw.innerText = newPassword
   text = psw.innerText
+  if(eye.classList.contains('fa-eye-slash')){
+    // eye.classList.remove('fa-eye-slash')
+    // eye.classList.add('fa-eye')
+    closeText()
+  }
 });
 
 const generatePassword = (length) => {
     let password = ''
     while(password.length < length){
-        let random = Math.trunc(Math.random() * 71)
+        let random = Math.trunc(Math.random() * 90)
         password += characters[random]
     }
-    return password
+    return  password
 };
 
 
@@ -45,6 +51,10 @@ copy.addEventListener('click', (e) =>{
 eye.addEventListener('click', (e) => {
     eye.classList.toggle('fa-eye')
     eye.classList.toggle('fa-eye-slash')
+    closeText()
+})
+
+const closeText = () => {
     closedText = psw.innerText.split('').map(l => (l = '*')).join('')
     if(eye.classList.contains('fa-eye')){
         psw.innerText = text
@@ -52,4 +62,4 @@ eye.addEventListener('click', (e) => {
     else{
         psw.innerText = closedText
     }
-})
+}
